@@ -2,7 +2,7 @@
 
 Floating teleprompter for macOS with:
 
-- a slow horizontal text crawl
+- a real teleprompter-style upward scroll
 - a transparent always-on-top window
 - a default position near the webcam
 - quick controls for speed, font size, and pinning

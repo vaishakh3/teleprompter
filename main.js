@@ -7,7 +7,7 @@ function getCameraDockBounds() {
   const primaryDisplay = screen.getPrimaryDisplay();
   const { workArea } = primaryDisplay;
   const width = Math.min(1120, workArea.width - 80);
-  const height = 250;
+  const height = Math.min(520, workArea.height - 80);
   const x = Math.round(workArea.x + (workArea.width - width) / 2);
   const y = Math.round(workArea.y + 32);
 
@@ -20,7 +20,7 @@ function createWindow() {
   mainWindow = new BrowserWindow({
     ...bounds,
     minWidth: 760,
-    minHeight: 200,
+    minHeight: 420,
     backgroundColor: '#00000000',
     frame: false,
     transparent: true,
@@ -29,7 +29,7 @@ function createWindow() {
     resizable: true,
     fullscreenable: false,
     titleBarStyle: 'hidden',
-    trafficLightPosition: { x: 18, y: 18 },
+    trafficLightPosition: { x: 20, y: 20 },
     webPreferences: {
       preload: path.join(__dirname, 'preload.js'),
       contextIsolation: true,

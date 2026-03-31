@@ -41,9 +41,9 @@ button {
 .shell {
   height: calc(100vh - 24px);
   display: grid;
-  grid-template-rows: auto 1fr auto auto;
+  grid-template-rows: auto minmax(250px, 1fr) auto auto;
   gap: 14px;
-  padding: 14px;
+  padding: 16px 16px 14px;
   border: 1px solid var(--line);
   border-radius: 28px;
   background:
@@ -61,6 +61,7 @@ button {
   align-items: center;
   justify-content: space-between;
   gap: 16px;
+  padding: 4px 0 0 72px;
   -webkit-app-region: drag;
 }
 
@@ -90,7 +91,7 @@ button {
 .brand h1 {
   margin: 0;
   font-family: 'Iowan Old Style', 'Palatino Linotype', serif;
-  font-size: 34px;
+  font-size: 30px;
   font-weight: 600;
   line-height: 1;
 }
@@ -139,7 +140,7 @@ button {
 
 .prompter-surface {
   position: relative;
-  min-height: 0;
+  min-height: 250px;
   border-radius: 24px;
   border: 1px solid rgba(255, 255, 255, 0.08);
   background:
@@ -159,44 +160,41 @@ button {
 
 .prompter-surface::before {
   background:
-    linear-gradient(90deg, rgba(9, 11, 15, 0.98) 0%, rgba(9, 11, 15, 0.3) 9%, rgba(9, 11, 15, 0.3) 91%, rgba(9, 11, 15, 0.98) 100%);
+    linear-gradient(180deg, rgba(9, 11, 15, 0.9) 0%, rgba(9, 11, 15, 0.28) 12%, rgba(9, 11, 15, 0.28) 88%, rgba(9, 11, 15, 0.9) 100%),
+    linear-gradient(90deg, rgba(9, 11, 15, 0.96) 0%, rgba(9, 11, 15, 0.2) 8%, rgba(9, 11, 15, 0.2) 92%, rgba(9, 11, 15, 0.96) 100%);
 }
 
 .prompter-surface::after {
-  inset: 16px 0;
+  inset: 22px 18px;
   border-top: 1px solid rgba(243, 182, 95, 0.18);
   border-bottom: 1px solid rgba(243, 182, 95, 0.18);
+  border-radius: 18px;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.015), rgba(255, 255, 255, 0.035), rgba(255, 255, 255, 0.015));
 }
 
 .crawl-window {
   position: absolute;
-  inset: 0;
-  display: flex;
-  align-items: center;
+  inset: 30px 26px;
   overflow: hidden;
+  border-radius: 18px;
 }
 
 .crawl-track {
-  position: relative;
-  display: flex;
-  align-items: center;
-  gap: 120px;
-  white-space: nowrap;
+  position: absolute;
+  inset: 0 0 auto;
   will-change: transform;
-  padding: 0 64px;
+  padding: 34px 80px 72px;
 }
 
 .crawl-text {
   font-family: 'Iowan Old Style', 'Palatino Linotype', serif;
-  font-size: 52px;
-  line-height: 1.1;
+  font-size: 46px;
+  line-height: 1.24;
   letter-spacing: 0.01em;
   color: #fff8ed;
   text-shadow: 0 0 30px rgba(0, 0, 0, 0.46);
-}
-
-.clone {
-  opacity: 0.32;
+  text-align: center;
+  white-space: pre-wrap;
 }
 
 .control-strip {
@@ -204,6 +202,7 @@ button {
   grid-template-columns: auto minmax(240px, 1fr);
   gap: 14px;
   align-items: stretch;
+  padding: 0 2px;
 }
 
 .field {
@@ -231,7 +230,8 @@ input[type='range'] {
 
 .script-field textarea {
   width: 100%;
-  min-height: 88px;
+  min-height: 72px;
+  max-height: 104px;
   resize: none;
   padding: 16px 18px;
   border-radius: 18px;
@@ -252,7 +252,8 @@ input[type='range'] {
   gap: 14px;
   align-items: center;
   color: var(--muted);
-  font-size: 12px;
+  font-size: 11px;
+  padding: 0 2px;
 }
 
 #statusText {
@@ -260,15 +261,19 @@ input[type='range'] {
 }
 
 @media (max-width: 980px) {
-  .shell {
-    grid-template-rows: auto 1fr auto auto;
-  }
-
   .control-strip {
     grid-template-columns: 1fr;
   }
 
   .primary-controls {
     flex-wrap: wrap;
+  }
+
+  .titlebar {
+    padding-left: 72px;
+  }
+
+  .crawl-track {
+    padding: 26px 32px 52px;
   }
 }

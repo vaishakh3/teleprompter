@@ -5,30 +5,29 @@ const minimizeBtn = document.getElementById('minimizeBtn');
 const scriptInput = document.getElementById('scriptInput');
 const speedInput = document.getElementById('speedInput');
 const fontInput = document.getElementById('fontInput');
+const crawlWindow = document.querySelector('.crawl-window');
 const crawlTrack = document.getElementById('crawlTrack');
 const crawlText = document.getElementById('crawlText');
-const crawlClone = document.getElementById('crawlClone');
 const statusText = document.getElementById('statusText');
 
 let isPlaying = false;
-let trackX = 0;
+let trackY = 0;
 let previousTimestamp = 0;
 
 function syncScript() {
   const text = scriptInput.value.trim() || 'Paste your script here and press play.';
   crawlText.textContent = text;
-  crawlClone.textContent = text;
   resetTrack();
 }
 
 function resetTrack() {
-  trackX = 0;
-  crawlTrack.style.transform = `translate3d(${trackX}px, 0, 0)`;
+  const lineHeight = getLineHeight();
+  trackY = Math.max(crawlWindow.clientHeight - lineHeight * 1.6, 24);
+  crawlTrack.style.transform = `translate3d(0, ${trackY}px, 0)`;
 }
 
 function updateFontSize() {
   crawlText.style.fontSize = `${fontInput.value}px`;
-  crawlClone.style.fontSize = `${fontInput.value}px`;
 }
 
 function setPlaying(nextState) {
@@ -42,8 +41,13 @@ function setPlaying(nextState) {
   }
 }
 
-function getLoopWidth() {
-  return crawlText.offsetWidth + 120;
+function getResetThreshold() {
+  return -crawlText.offsetHeight - 24;
+}
+
+function getLineHeight() {
+  const computedLineHeight = Number.parseFloat(window.getComputedStyle(crawlText).lineHeight);
+  return Number.isFinite(computedLineHeight) ? computedLineHeight : Number(fontInput.value) * 1.28;
 }
 
 function step(timestamp) {
@@ -58,14 +62,14 @@ function step(timestamp) {
   const delta = (timestamp - previousTimestamp) / 1000;
   previousTimestamp = timestamp;
 
-  trackX -= Number(speedInput.value) * delta;
-  const loopWidth = getLoopWidth();
+  trackY -= Number(speedInput.value) * delta;
+  const resetThreshold = getResetThreshold();
 
-  if (Math.abs(trackX) >= loopWidth) {
-    trackX += loopWidth;
+  if (trackY <= resetThreshold) {
+    trackY = Math.max(crawlWindow.clientHeight - getLineHeight() * 1.6, 24);
   }
 
-  crawlTrack.style.transform = `translate3d(${trackX}px, 0, 0)`;
+  crawlTrack.style.transform = `translate3d(0, ${trackY}px, 0)`;
   requestAnimationFrame(step);
 }
 
@@ -128,3 +132,4 @@ window.addEventListener('keydown', (event) => {
 
 syncScript();
 updateFontSize();
+window.addEventListener('resize', resetTrack);
