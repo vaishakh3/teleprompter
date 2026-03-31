@@ -1,0 +1,12 @@
+{
+  "name": "teleprompter-mac",
+  "version": "1.0.0",
+  "description": "Floating Mac teleprompter with a slow horizontal crawl near the webcam.",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron ."
+  },
+  "devDependencies": {
+    "electron": "^36.2.1"
+  }
+}

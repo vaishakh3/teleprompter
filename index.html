@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Teleprompter</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <main class="shell">
+      <header class="titlebar">
+        <div class="brand">
+          <span class="brand-mark"></span>
+          <div>
+            <p class="eyebrow">Floating teleprompter</p>
+            <h1>Tele</h1>
+          </div>
+        </div>
+
+        <div class="window-actions">
+          <button id="dockCameraBtn" class="ghost-button">Near camera</button>
+          <button id="pinBtn" class="ghost-button">Pinned</button>
+          <button id="minimizeBtn" class="traffic-button">-</button>
+        </div>
+      </header>
+
+      <section class="prompter-surface">
+        <div class="crawl-window">
+          <div id="crawlTrack" class="crawl-track">
+            <div id="crawlText" class="crawl-text"></div>
+            <div id="crawlClone" class="crawl-text clone" aria-hidden="true"></div>
+          </div>
+        </div>
+      </section>
+
+      <section class="control-strip">
+        <div class="primary-controls">
+          <button id="playBtn" class="play-button">Play</button>
+          <label class="field speed-field">
+            <span>Speed</span>
+            <input id="speedInput" type="range" min="10" max="120" step="1" value="34" />
+          </label>
+          <label class="field font-field">
+            <span>Font</span>
+            <input id="fontInput" type="range" min="28" max="88" step="1" value="52" />
+          </label>
+        </div>
+
+        <label class="field script-field">
+          <span>Script</span>
+          <textarea id="scriptInput" spellcheck="false">Welcome. Keep your eyes near the camera, speak naturally, and let the words drift past at a steady pace. You can paste a longer script here, hit play, and dock the window right under your Mac webcam.</textarea>
+        </label>
+      </section>
+
+      <footer class="helper-row">
+        <span id="statusText">Paused</span>
+        <span>Space: play/pause</span>
+        <span>Arrow keys: speed</span>
+        <span>+ / - : font</span>
+      </footer>
+    </main>
+
+    <script src="renderer.js"></script>
+  </body>
+</html>
